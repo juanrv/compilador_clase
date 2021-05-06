@@ -46,21 +46,29 @@ namespace lectorArchivo
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataSimbolos = new System.Windows.Forms.DataGridView();
+            this.LexemaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionInicialSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionFinalSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.dataPalabrasReservadas = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.dataLiterales = new System.Windows.Forms.DataGridView();
+            this.ComponenteL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.dataDummys = new System.Windows.Forms.DataGridView();
+            this.ComponenteD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.ComponenteL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComponenteP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComponenteS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComponenteD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataPalabraReservada = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabIngreso.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -68,13 +76,13 @@ namespace lectorArchivo
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSimbolos)).BeginInit();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPalabrasReservadas)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLiterales)).BeginInit();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataDummys)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPalabraReservada)).BeginInit();
             this.SuspendLayout();
             // 
             // tabIngreso
@@ -264,7 +272,11 @@ namespace lectorArchivo
             this.dataSimbolos.AllowUserToDeleteRows = false;
             this.dataSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ComponenteS});
+            this.LexemaSimbolo,
+            this.CategoriaSimbolo,
+            this.LineaSimbolo,
+            this.PosicionInicialSimbolo,
+            this.PosicionFinalSimbolo});
             this.dataSimbolos.Location = new System.Drawing.Point(3, 3);
             this.dataSimbolos.Name = "dataSimbolos";
             this.dataSimbolos.ReadOnly = true;
@@ -272,9 +284,39 @@ namespace lectorArchivo
             this.dataSimbolos.Size = new System.Drawing.Size(1342, 706);
             this.dataSimbolos.TabIndex = 0;
             // 
+            // LexemaSimbolo
+            // 
+            this.LexemaSimbolo.HeaderText = "Lexema";
+            this.LexemaSimbolo.Name = "LexemaSimbolo";
+            this.LexemaSimbolo.ReadOnly = true;
+            // 
+            // CategoriaSimbolo
+            // 
+            this.CategoriaSimbolo.HeaderText = "Categoria";
+            this.CategoriaSimbolo.Name = "CategoriaSimbolo";
+            this.CategoriaSimbolo.ReadOnly = true;
+            // 
+            // LineaSimbolo
+            // 
+            this.LineaSimbolo.HeaderText = "Linea";
+            this.LineaSimbolo.Name = "LineaSimbolo";
+            this.LineaSimbolo.ReadOnly = true;
+            // 
+            // PosicionInicialSimbolo
+            // 
+            this.PosicionInicialSimbolo.HeaderText = "Posicion Inicial";
+            this.PosicionInicialSimbolo.Name = "PosicionInicialSimbolo";
+            this.PosicionInicialSimbolo.ReadOnly = true;
+            // 
+            // PosicionFinalSimbolo
+            // 
+            this.PosicionFinalSimbolo.HeaderText = "Posicion Final";
+            this.PosicionFinalSimbolo.Name = "PosicionFinalSimbolo";
+            this.PosicionFinalSimbolo.ReadOnly = true;
+            // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.dataPalabrasReservadas);
+            this.tabPage5.Controls.Add(this.dataPalabraReservada);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -282,17 +324,6 @@ namespace lectorArchivo
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Tabla de Palabras Reservadas";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // dataPalabrasReservadas
-            // 
-            this.dataPalabrasReservadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPalabrasReservadas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ComponenteP});
-            this.dataPalabrasReservadas.Location = new System.Drawing.Point(3, 3);
-            this.dataPalabrasReservadas.Name = "dataPalabrasReservadas";
-            this.dataPalabrasReservadas.RowTemplate.Height = 25;
-            this.dataPalabrasReservadas.Size = new System.Drawing.Size(1342, 706);
-            this.dataPalabrasReservadas.TabIndex = 0;
             // 
             // tabPage6
             // 
@@ -315,6 +346,11 @@ namespace lectorArchivo
             this.dataLiterales.Size = new System.Drawing.Size(1342, 706);
             this.dataLiterales.TabIndex = 0;
             // 
+            // ComponenteL
+            // 
+            this.ComponenteL.HeaderText = "Componente";
+            this.ComponenteL.Name = "ComponenteL";
+            // 
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.dataDummys);
@@ -335,6 +371,11 @@ namespace lectorArchivo
             this.dataDummys.RowTemplate.Height = 25;
             this.dataDummys.Size = new System.Drawing.Size(1345, 706);
             this.dataDummys.TabIndex = 0;
+            // 
+            // ComponenteD
+            // 
+            this.ComponenteD.HeaderText = "Componente";
+            this.ComponenteD.Name = "ComponenteD";
             // 
             // tabPage3
             // 
@@ -387,26 +428,58 @@ namespace lectorArchivo
             this.tabPage10.Text = "Errores Sintacticos";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
-            // ComponenteL
+            // dataPalabraReservada
             // 
-            this.ComponenteL.HeaderText = "Componente";
-            this.ComponenteL.Name = "ComponenteL";
+            this.dataPalabraReservada.AllowUserToAddRows = false;
+            this.dataPalabraReservada.AllowUserToDeleteRows = false;
+            this.dataPalabraReservada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPalabraReservada.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.dataPalabraReservada.Location = new System.Drawing.Point(3, 3);
+            this.dataPalabraReservada.Name = "dataPalabraReservada";
+            this.dataPalabraReservada.ReadOnly = true;
+            this.dataPalabraReservada.RowTemplate.Height = 25;
+            this.dataPalabraReservada.Size = new System.Drawing.Size(1342, 706);
+            this.dataPalabraReservada.TabIndex = 1;
             // 
-            // ComponenteP
+            // dataGridViewTextBoxColumn1
             // 
-            this.ComponenteP.HeaderText = "Componente";
-            this.ComponenteP.Name = "ComponenteP";
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Lexema";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // ComponenteS
+            // dataGridViewTextBoxColumn2
             // 
-            this.ComponenteS.HeaderText = "Componente";
-            this.ComponenteS.Name = "ComponenteS";
-            this.ComponenteS.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Categoria";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // ComponenteD
+            // dataGridViewTextBoxColumn3
             // 
-            this.ComponenteD.HeaderText = "Componente";
-            this.ComponenteD.Name = "ComponenteD";
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Linea";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Posicion Inicial";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Posicion Final";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // Form1
             // 
@@ -425,13 +498,13 @@ namespace lectorArchivo
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSimbolos)).EndInit();
             this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataPalabrasReservadas)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLiterales)).EndInit();
             this.tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataDummys)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataPalabraReservada)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -459,17 +532,25 @@ namespace lectorArchivo
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataSimbolos;
-        private System.Windows.Forms.DataGridView dataPalabrasReservadas;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.DataGridView dataLiterales;
         private System.Windows.Forms.DataGridView dataDummys;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ComponenteS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ComponenteP;
         private System.Windows.Forms.DataGridViewTextBoxColumn ComponenteL;
         private System.Windows.Forms.DataGridViewTextBoxColumn ComponenteD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LexemaSimbolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaSimbolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LineaSimbolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionInicialSimbolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionFinalSimbolo;
+        private System.Windows.Forms.DataGridView dataPalabraReservada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }
 

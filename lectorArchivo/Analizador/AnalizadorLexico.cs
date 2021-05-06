@@ -59,6 +59,7 @@ namespace lectorArchivo.Analizador
             else if (Puntero > LineaActual.ObtenerContenido().Length)
             {
                 CaracterActual = "@FL@";
+                AdelantarPuntero();
             }
             else
             {
@@ -70,9 +71,6 @@ namespace lectorArchivo.Analizador
         private void FormarComponente()
         {
             Lexema = Lexema + CaracterActual;
-            
-
-
         }
 
         private void ResetearLexema()
@@ -322,16 +320,30 @@ namespace lectorArchivo.Analizador
             }
             else if (EsMayorQue())
             {
-                EstadoActual = 20;
+                EstadoActual = 21;
                 FormarComponente();
             }
             else if (EsFinLInea())
             {
                 EstadoActual = 13;
             }
-            else
+            else if (EsAdmiracion())
+            {
+                EstadoActual = 30;
+                FormarComponente();
+            }
+            else if (EsDosPuntos())
+            {
+                EstadoActual = 22;
+                FormarComponente();
+            }
+            else if (LineaActual.EsFinArchivo())
             {
                 EstadoActual = 12;
+            }
+            else 
+            {
+                EstadoActual = 18;
             }
             
         }
@@ -394,7 +406,7 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoCinco()
         {
-
+            
             ContinuarAnalisis = false;
             CrearComponente(Lexema, Categoria.SUMA, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
 
@@ -463,18 +475,19 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoCatorce()
         {
-            
+            DevolverPuntero();
             CrearComponente(Lexema, Categoria.NUMERO_ENTERO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
         private void EstadoQuince()
         {
+            DevolverPuntero();
             ContinuarAnalisis = false;
             CrearComponente(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoDieciseis()
         {
-           
+            DevolverPuntero();
             ContinuarAnalisis = false;
             CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
 
@@ -483,14 +496,14 @@ namespace lectorArchivo.Analizador
         {
             
             ContinuarAnalisis = false;
-
+            DevolverPuntero();
             String Causa = "Se esperaba un dígito y se recibió" + CaracterActual;
             String falla = "Número decimal no valido";
             String Solucion = "NUMERO DECIMAL";
 
             Error Error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, falla, Causa, Solucion);
             ManejadorErrores.Reportar(Error);
-            CrearComponenteDummy("1", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObetenerPosicionInicial());
+            CrearComponenteDummy("1,0", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObtenerPosicionFinal());
             
 
         }
@@ -568,9 +581,9 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoVeinticinco()
         {
-         
+            DevolverPuntero();
             ContinuarAnalisis = false;
-            CrearComponente(Lexema, Categoria.DIFERENTE_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.MENOR_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoVeintiseis()
         {
@@ -579,6 +592,7 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoVeintisiete()
         {
+            DevolverPuntero();
             ContinuarAnalisis = false;
             CrearComponente(Lexema, Categoria.MAYOR_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
@@ -589,17 +603,19 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoVeintinueve()
         {
+            DevolverPuntero();
             ContinuarAnalisis = false;
             String Causa = "Se esperaba un igual y se recibió" + CaracterActual;
             String falla = "Asignación no válida";
             String Solucion = "ASIGNACION";
             Error Error = Error.CrearErrorLexico(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, falla, Causa, Solucion);
             ManejadorErrores.Reportar(Error);
-            CrearComponenteDummy("1", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObetenerPosicionInicial());
+            CrearComponenteDummy(":=", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObtenerPosicionFinal());
 
         }
         private void EstadoTreinta()
         {
+            LeerSiguienteCaracter();
             if (EsIgual())
             {
                 EstadoActual = 31;
@@ -617,17 +633,19 @@ namespace lectorArchivo.Analizador
         }
         private void EstadoTreintaidos()
         {
+            DevolverPuntero();
             ContinuarAnalisis = false;
             String Causa = "Se esperaba un igual y se recibió" + CaracterActual;
             String falla = "Asignación no válida";
             String Solucion = "DIFERENTE QUE";
             Error Error = Error.CrearErrorLexico(Lexema, Categoria.DIFERENTE_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, falla, Causa, Solucion);
             ManejadorErrores.Reportar(Error);
-            CrearComponenteDummy("1", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObetenerPosicionInicial());
+            CrearComponenteDummy("!=", Error.ObtenerCategoria(), Error.ObtenerNumeroLinea(), Error.ObetenerPosicionInicial(), Error.ObtenerPosicionFinal());
 
         }
         private void EstadoTreintaitres()
         {
+            DevolverPuntero();
             ContinuarAnalisis = false;
             CrearComponente(Lexema, Categoria.DIVISION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
@@ -739,6 +757,10 @@ namespace lectorArchivo.Analizador
         {
             return ",".Equals(CaracterActual);
         }
+        private bool EsDosPuntos()
+        {
+            return ":".Equals(CaracterActual);
+        }
         private bool EsIgual()
         {
             return "=".Equals(CaracterActual);
@@ -750,6 +772,10 @@ namespace lectorArchivo.Analizador
         private bool EsMayorQue()
         {
             return ">".Equals(CaracterActual);
+        }
+        private bool EsAdmiracion()
+        {
+            return "!".Equals(CaracterActual);
         }
         private bool EsGuinBajo()
         {

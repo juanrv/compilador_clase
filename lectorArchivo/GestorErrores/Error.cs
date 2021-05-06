@@ -82,5 +82,6 @@ namespace lectorArchivo.GestorErrores
 		{
 			return Tipo;
 		}
+		
 	}
 }

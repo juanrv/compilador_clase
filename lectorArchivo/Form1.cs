@@ -186,7 +186,15 @@ namespace lectorArchivo
             String ruta = textRuta.Text;
             StreamReader lector = new StreamReader(@"" + ruta);
             List<String> lineasEntrada = new List<string>();
+
+            String lineaActual;
             
+            while ((lineaActual = lector.ReadLine()) != null)
+            {
+                lineasEntrada.Add(lineaActual);
+            }
+            salidaDatos.Lines = lineasEntrada.ToArray();
+
             Resetear();
             for (int i = 0; i < lineasEntrada.Count(); i++)
             {
@@ -268,7 +276,7 @@ namespace lectorArchivo
         private void cargarInfoConsola_Click_1(object sender, EventArgs e)
         {
             String[] lineasEntradas = entradaDatosConsola.Lines;
-            
+            salidaDatos.Lines = lineasEntradas;
             Resetear();
             for (int i = 0; i < lineasEntradas.Length; i++)
             {
@@ -281,12 +289,13 @@ namespace lectorArchivo
                
                 while (!componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
                 {
-                    MessageBox.Show(componente.ToString());
+                    //MessageBox.Show(componente.ToString());
 
                     componente = analizador.Analizar();
                    
 
                 }
+                LlenarTablas();
                 
                 if (ManejadorErrores.HayErrores())
                 {
@@ -303,6 +312,17 @@ namespace lectorArchivo
             }
 
             
+        }
+        private void LlenarTablas()
+        {
+            List<ComponenteLexico> listaSimbolo = TablaSimbolos.ObtenerSimbolos();
+            for(int i =0; i<listaSimbolo.Count; i++)
+            {
+                dataSimbolos.Rows.Add(listaSimbolo[i].ObtenerLexema(), listaSimbolo[i].ObtenerCategoria(), listaSimbolo[i].ObtenerNumeroLinea(), listaSimbolo[i].ObetenerPosicionInicial(), listaSimbolo[i].ObtenerPosicionFinal());
+
+            }
+            List<ComponenteLexico> listaPalabrasReservadas = TablaPalabraReservadas.
+
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

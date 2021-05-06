@@ -47,6 +47,10 @@ namespace lectorArchivo.Tablas
         {
             return INSTANCIA.SIMBOLOS.Values.SelectMany(componente => componente).ToList();
         }
+        public static List<ComponenteLexico> ObtenerS()
+        {
+            return null;
+        }
 
         public Boolean EsPalabraReservada(String Lexema)
         {
