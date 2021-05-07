@@ -56,6 +56,13 @@ namespace lectorArchivo
             Cache.obtenerCache().Limpiar();
             ManejadorErrores.Limpiar();
             TablaMaestra.Limpiar();
+            dataDummys.Rows.Clear();
+            dataSimbolos.Rows.Clear();
+            dataLiterales.Rows.Clear();
+            dataPalabraReservada.Rows.Clear();
+            dataErroresLexicos.Rows.Clear();
+            dataErroresSeman.Rows.Clear();
+            dataErroresSintac.Rows.Clear();
         }
 
         private void botonCargarInfo_Click(object sender, EventArgs e)
@@ -143,6 +150,13 @@ namespace lectorArchivo
             textRuta.Clear();
             entradaDatosConsola.Clear();
             salidaDatos.Clear();
+            dataDummys.Rows.Clear();
+            dataSimbolos.Rows.Clear();
+            dataLiterales.Rows.Clear();
+            dataPalabraReservada.Rows.Clear();
+            dataErroresLexicos.Rows.Clear();
+            dataErroresSeman.Rows.Clear();
+            dataErroresSintac.Rows.Clear();
         }
 
         private void tabIngreso_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,24 +223,7 @@ namespace lectorArchivo
                     MessageBox.Show(componente.ToString());
                     
                     componente = analizador.Analizar();
-                    switch (componente.ObtenerTipo())
-                    {
-                        case TipoComponente.SIMBOLO:
-                            dataSimbolos.Rows.Add(componente.ToString());
-                            break;
-                        case TipoComponente.DUMMY:
-                            dataDummys.Rows.Add(componente.ToString());
-                            break;
-                        case TipoComponente.LITERAL:
-                            dataLiterales.Rows.Add(componente.ToString());
-                            break;
-                        case TipoComponente.PALABRA_RESERVADA:
-                            dataPalabrasReservadas.Rows.Add(componente.ToString());
-                            break;
-                        default:
-                            MessageBox.Show("El componente no tiene tipo");
-                            break;
-                    }
+                    
 
                 }
                 if (ManejadorErrores.HayErrores())
@@ -308,6 +305,7 @@ namespace lectorArchivo
             }
             catch (Exception ex)
             {
+                LlenarTablas();
                 MessageBox.Show(ex.Message);
             }
 
@@ -321,13 +319,51 @@ namespace lectorArchivo
                 dataSimbolos.Rows.Add(listaSimbolo[i].ObtenerLexema(), listaSimbolo[i].ObtenerCategoria(), listaSimbolo[i].ObtenerNumeroLinea(), listaSimbolo[i].ObetenerPosicionInicial(), listaSimbolo[i].ObtenerPosicionFinal());
 
             }
-            List<ComponenteLexico> listaPalabrasReservadas = TablaPalabraReservadas.
+            listaSimbolo = TablaPalabraReservadas.ObtenerSimbolos();
+            for (int i = 0; i < listaSimbolo.Count; i++)
+            {
+                dataPalabraReservada.Rows.Add(listaSimbolo[i].ObtenerLexema(), listaSimbolo[i].ObtenerCategoria(), listaSimbolo[i].ObtenerNumeroLinea(), listaSimbolo[i].ObetenerPosicionInicial(), listaSimbolo[i].ObtenerPosicionFinal());
+
+            }
+            listaSimbolo = TablaLiterales.ObtenerLiterales();
+            for (int i = 0; i < listaSimbolo.Count; i++)
+            {
+                dataLiterales.Rows.Add(listaSimbolo[i].ObtenerLexema(), listaSimbolo[i].ObtenerCategoria(), listaSimbolo[i].ObtenerNumeroLinea(), listaSimbolo[i].ObetenerPosicionInicial(), listaSimbolo[i].ObtenerPosicionFinal());
+
+            }
+            listaSimbolo = TablaDummys.ObtenerDummys();
+            for (int i = 0; i < listaSimbolo.Count; i++)
+            {
+                dataDummys.Rows.Add(listaSimbolo[i].ObtenerLexema(), listaSimbolo[i].ObtenerCategoria(), listaSimbolo[i].ObtenerNumeroLinea(), listaSimbolo[i].ObetenerPosicionInicial(), listaSimbolo[i].ObtenerPosicionFinal());
+
+            }
+
+            List<Error> listaErrores = ManejadorErrores.ObtenerErroresLexicos();
+            for (int i = 0; i < listaErrores.Count; i++)
+            {
+                dataErroresLexicos.Rows.Add(listaErrores[i].ObtenerLexema(), listaErrores[i].ObtenerCategoria(), listaErrores[i].ObtenerNumeroLinea(), listaErrores[i].ObetenerPosicionInicial(), listaErrores[i].ObtenerPosicionFinal(),
+                    listaErrores[i].ObtenerFalla(), listaErrores[i].ObtenerCausa(), listaErrores[i].ObtenerSolucion());
+
+            }
+            
+            listaErrores = ManejadorErrores.ObtenerErroresSintatacticos();
+            for (int i = 0; i < listaErrores.Count; i++)
+            {
+                dataErroresSintac.Rows.Add(listaErrores[i].ObtenerLexema(), listaErrores[i].ObtenerCategoria(), listaErrores[i].ObtenerNumeroLinea(), listaErrores[i].ObetenerPosicionInicial(), listaErrores[i].ObtenerPosicionFinal(),
+                    listaErrores[i].ObtenerFalla(), listaErrores[i].ObtenerCausa(), listaErrores[i].ObtenerSolucion());
+
+            }
+            listaErrores = ManejadorErrores.ObtenerErroresSemanticos();
+            for (int i = 0; i < listaErrores.Count; i++)
+            {
+                dataErroresSeman.Rows.Add(listaErrores[i].ObtenerLexema(), listaErrores[i].ObtenerCategoria(), listaErrores[i].ObtenerNumeroLinea(), listaErrores[i].ObetenerPosicionInicial(), listaErrores[i].ObtenerPosicionFinal(),
+                    listaErrores[i].ObtenerFalla(), listaErrores[i].ObtenerCausa(), listaErrores[i].ObtenerSolucion());
+
+            }
 
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
+        
     }
 }

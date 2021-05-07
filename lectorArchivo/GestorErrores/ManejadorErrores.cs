@@ -56,11 +56,26 @@ namespace lectorArchivo.GestorErrores
 		{
 			return HayErroresLexicos() || HayErroresSemanticos() || HayErroresSintancticos();
 		}
-		public static List<Error> ObtenerErrores()
+		public static List<Error> ObtenerErroresLexicos()
 		{
 			List<Error> ListaRetorno = new List<Error>();
 			ListaRetorno.AddRange(ObtenerErrores(TipoError.LEXICO));
+
+			return ListaRetorno;
+
+			//INSTANCIA.ERRORES.Values.SelectMany(error => error).ToList();
+		}
+		public static List<Error> ObtenerErroresSintatacticos()
+		{
+			List<Error> ListaRetorno = new List<Error>();
 			ListaRetorno.AddRange(ObtenerErrores(TipoError.SINTACTICO));
+			return ListaRetorno;
+
+			//INSTANCIA.ERRORES.Values.SelectMany(error => error).ToList();
+		}
+		public static List<Error> ObtenerErroresSemanticos()
+		{
+			List<Error> ListaRetorno = new List<Error>();
 			ListaRetorno.AddRange(ObtenerErrores(TipoError.SEMANTICO));
 
 			return ListaRetorno;

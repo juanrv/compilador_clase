@@ -14,12 +14,18 @@ namespace lectorArchivo.Tablas
 
         private TablaPalabraReservadas()
         {
-            PALABRAS_RESERVADAS.Add("A", ComponenteLexico.CrearComponentePalabraReservada("A", Categoria.PALABRA_RESERVADA_A));
-            PALABRAS_RESERVADAS.Add("B", ComponenteLexico.CrearComponentePalabraReservada("B", Categoria.PALABRA_RESERVADA_B));
-            PALABRAS_RESERVADAS.Add("C", ComponenteLexico.CrearComponentePalabraReservada("C", Categoria.PALABRA_RESERVADA_C));
+            PALABRAS_RESERVADAS.Add("String", ComponenteLexico.CrearComponentePalabraReservada("String", Categoria.STRING));
+            PALABRAS_RESERVADAS.Add("string", ComponenteLexico.CrearComponentePalabraReservada("string", Categoria.STRING));
+            PALABRAS_RESERVADAS.Add("int", ComponenteLexico.CrearComponentePalabraReservada("int", Categoria.INT));
+            PALABRAS_RESERVADAS.Add("Integer", ComponenteLexico.CrearComponentePalabraReservada("Integer", Categoria.INTEGER));
+            PALABRAS_RESERVADAS.Add("float", ComponenteLexico.CrearComponentePalabraReservada("float", Categoria.FLOAT));
+            PALABRAS_RESERVADAS.Add("double", ComponenteLexico.CrearComponentePalabraReservada("double", Categoria.DOUBLE));
+            PALABRAS_RESERVADAS.Add("boolean", ComponenteLexico.CrearComponentePalabraReservada("boolena", Categoria.BOOLEAN));
+
+
         }
 
-        
+
 
         public static void Limpiar()
         {
@@ -38,7 +44,7 @@ namespace lectorArchivo.Tablas
         {
             if (componente != null
                 && !componente.ObtenerLexema().Equals("")
-                && componente.ObtenerTipo().Equals(TipoComponente.SIMBOLO))
+                && componente.ObtenerTipo().Equals(TipoComponente.PALABRA_RESERVADA))
             {
                 INSTANCIA.ObetenerSimbolo(componente.ObtenerLexema()).Add(componente);
             }
@@ -47,10 +53,7 @@ namespace lectorArchivo.Tablas
         {
             return INSTANCIA.SIMBOLOS.Values.SelectMany(componente => componente).ToList();
         }
-        public static List<ComponenteLexico> ObtenerS()
-        {
-            return null;
-        }
+       
 
         public Boolean EsPalabraReservada(String Lexema)
         {
