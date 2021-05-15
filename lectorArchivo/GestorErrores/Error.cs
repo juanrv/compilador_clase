@@ -36,6 +36,7 @@ namespace lectorArchivo.GestorErrores
 		{
 			return new Error(Lexedema, categoria, numeroLinea, posicionInicial, posicionFinal, Falla, Causa, Solucion, TipoError.LEXICO);
 		}
+
 		public static Error CrearErrorSemantico(String Lexedema, Categoria categoria, int numeroLinea, int posicionInicial, int posicionFinal, String Falla, String Causa, String Solucion)
 		{
 			return new Error(Lexedema, categoria, numeroLinea, posicionInicial, posicionFinal, Falla, Causa, Solucion, TipoError.SEMANTICO);

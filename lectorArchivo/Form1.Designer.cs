@@ -46,6 +46,11 @@ namespace lectorArchivo
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataSimbolos = new System.Windows.Forms.DataGridView();
+            this.LexemaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionInicialSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionFinalSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataPalabraReservada = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +75,7 @@ namespace lectorArchivo
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
             this.dataErroresLexicos = new System.Windows.Forms.DataGridView();
-            this.LexemaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategoriaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineaSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PosicionInicialSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PosicionFinalSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +84,7 @@ namespace lectorArchivo
             this.Falla = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Causa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Solucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.dataErroresSeman = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +94,7 @@ namespace lectorArchivo
             this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
             this.dataErroresSintac = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,6 +104,7 @@ namespace lectorArchivo
             this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkDepurar = new System.Windows.Forms.CheckBox();
             this.tabIngreso.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -119,10 +120,10 @@ namespace lectorArchivo
             this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage8.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresLexicos)).BeginInit();
+            this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresSeman)).BeginInit();
+            this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresSintac)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,6 +141,7 @@ namespace lectorArchivo
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkDepurar);
             this.tabPage1.Controls.Add(this.botonLimpiar);
             this.tabPage1.Controls.Add(this.cargarInfoConsola);
             this.tabPage1.Controls.Add(this.botonCargarInfo);
@@ -323,6 +325,41 @@ namespace lectorArchivo
             this.dataSimbolos.RowTemplate.Height = 25;
             this.dataSimbolos.Size = new System.Drawing.Size(1342, 706);
             this.dataSimbolos.TabIndex = 0;
+            // 
+            // LexemaSimbolo
+            // 
+            this.LexemaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LexemaSimbolo.HeaderText = "Lexema";
+            this.LexemaSimbolo.Name = "LexemaSimbolo";
+            this.LexemaSimbolo.ReadOnly = true;
+            // 
+            // CategoriaSimbolo
+            // 
+            this.CategoriaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CategoriaSimbolo.HeaderText = "Categoria";
+            this.CategoriaSimbolo.Name = "CategoriaSimbolo";
+            this.CategoriaSimbolo.ReadOnly = true;
+            // 
+            // LineaSimbolo
+            // 
+            this.LineaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LineaSimbolo.HeaderText = "Linea";
+            this.LineaSimbolo.Name = "LineaSimbolo";
+            this.LineaSimbolo.ReadOnly = true;
+            // 
+            // PosicionInicialSimbolo
+            // 
+            this.PosicionInicialSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PosicionInicialSimbolo.HeaderText = "Posicion Inicial";
+            this.PosicionInicialSimbolo.Name = "PosicionInicialSimbolo";
+            this.PosicionInicialSimbolo.ReadOnly = true;
+            // 
+            // PosicionFinalSimbolo
+            // 
+            this.PosicionFinalSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PosicionFinalSimbolo.HeaderText = "Posicion Final";
+            this.PosicionFinalSimbolo.Name = "PosicionFinalSimbolo";
+            this.PosicionFinalSimbolo.ReadOnly = true;
             // 
             // tabPage5
             // 
@@ -546,28 +583,6 @@ namespace lectorArchivo
             this.tabPage8.Text = "Errores Lexicos";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // tabPage9
-            // 
-            this.tabPage9.Controls.Add(this.dataErroresSeman);
-            this.tabPage9.Location = new System.Drawing.Point(4, 24);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1347, 712);
-            this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "Errores Semanticos";
-            this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.dataErroresSintac);
-            this.tabPage10.Location = new System.Drawing.Point(4, 24);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1347, 712);
-            this.tabPage10.TabIndex = 2;
-            this.tabPage10.Text = "Errores Sintacticos";
-            this.tabPage10.UseVisualStyleBackColor = true;
-            // 
             // dataErroresLexicos
             // 
             this.dataErroresLexicos.AllowUserToAddRows = false;
@@ -588,41 +603,6 @@ namespace lectorArchivo
             this.dataErroresLexicos.RowTemplate.Height = 25;
             this.dataErroresLexicos.Size = new System.Drawing.Size(1342, 706);
             this.dataErroresLexicos.TabIndex = 1;
-            // 
-            // LexemaSimbolo
-            // 
-            this.LexemaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LexemaSimbolo.HeaderText = "Lexema";
-            this.LexemaSimbolo.Name = "LexemaSimbolo";
-            this.LexemaSimbolo.ReadOnly = true;
-            // 
-            // CategoriaSimbolo
-            // 
-            this.CategoriaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CategoriaSimbolo.HeaderText = "Categoria";
-            this.CategoriaSimbolo.Name = "CategoriaSimbolo";
-            this.CategoriaSimbolo.ReadOnly = true;
-            // 
-            // LineaSimbolo
-            // 
-            this.LineaSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LineaSimbolo.HeaderText = "Linea";
-            this.LineaSimbolo.Name = "LineaSimbolo";
-            this.LineaSimbolo.ReadOnly = true;
-            // 
-            // PosicionInicialSimbolo
-            // 
-            this.PosicionInicialSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PosicionInicialSimbolo.HeaderText = "Posicion Inicial";
-            this.PosicionInicialSimbolo.Name = "PosicionInicialSimbolo";
-            this.PosicionInicialSimbolo.ReadOnly = true;
-            // 
-            // PosicionFinalSimbolo
-            // 
-            this.PosicionFinalSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PosicionFinalSimbolo.HeaderText = "Posicion Final";
-            this.PosicionFinalSimbolo.Name = "PosicionFinalSimbolo";
-            this.PosicionFinalSimbolo.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn16
             // 
@@ -679,6 +659,17 @@ namespace lectorArchivo
             this.Solucion.HeaderText = "Solucion";
             this.Solucion.Name = "Solucion";
             this.Solucion.ReadOnly = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.dataErroresSeman);
+            this.tabPage9.Location = new System.Drawing.Point(4, 24);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(1347, 712);
+            this.tabPage9.TabIndex = 1;
+            this.tabPage9.Text = "Errores Semanticos";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // dataErroresSeman
             // 
@@ -757,6 +748,17 @@ namespace lectorArchivo
             this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
             this.dataGridViewTextBoxColumn28.ReadOnly = true;
             // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.dataErroresSintac);
+            this.tabPage10.Location = new System.Drawing.Point(4, 24);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(1347, 712);
+            this.tabPage10.TabIndex = 2;
+            this.tabPage10.Text = "Errores Sintacticos";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
             // dataErroresSintac
             // 
             this.dataErroresSintac.AllowUserToAddRows = false;
@@ -834,6 +836,18 @@ namespace lectorArchivo
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
             // 
+            // checkDepurar
+            // 
+            this.checkDepurar.AutoSize = true;
+            this.checkDepurar.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.checkDepurar.Location = new System.Drawing.Point(657, 527);
+            this.checkDepurar.Name = "checkDepurar";
+            this.checkDepurar.Size = new System.Drawing.Size(53, 33);
+            this.checkDepurar.TabIndex = 22;
+            this.checkDepurar.Text = "Depurar";
+            this.checkDepurar.UseVisualStyleBackColor = true;
+            this.checkDepurar.CheckedChanged += new System.EventHandler(this.checkDepurar_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -859,10 +873,10 @@ namespace lectorArchivo
             this.tabPage3.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresLexicos)).EndInit();
+            this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresSeman)).EndInit();
+            this.tabPage10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataErroresSintac)).EndInit();
             this.ResumeLayout(false);
 
@@ -945,6 +959,7 @@ namespace lectorArchivo
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.CheckBox checkDepurar;
     }
 }
 

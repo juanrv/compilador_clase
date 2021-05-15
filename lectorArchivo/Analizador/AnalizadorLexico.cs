@@ -444,7 +444,7 @@ namespace lectorArchivo.Analizador
             }
             else
             {
-                EstadoActual = 13;
+                EstadoActual = 33;
             }
 
         }

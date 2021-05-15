@@ -13,11 +13,14 @@ using lectorArchivo.Analizador;
 using lectorArchivo.GestorErrores;
 using lectorArchivo.Tablas;
 using lectorArchivo.Transversal;
+using lectorArchivo.AnalisisSintactico;
 
 namespace lectorArchivo
 {
     public partial class Form1 : Form
     {
+
+        bool depurar = false;
         public Form1()
         {
             InitializeComponent();
@@ -216,16 +219,19 @@ namespace lectorArchivo
             }
             try
             {
-                AnalizadorLexico analizador = new AnalizadorLexico();
-                ComponenteLexico componente = analizador.Analizar();
-                while (!componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
-                {
-                    MessageBox.Show(componente.ToString());
-                    
-                    componente = analizador.Analizar();
-                    
+                //AnalizadorLexico analizador = new AnalizadorLexico();
+                AnalizadorSintactico AnaSin = new AnalizadorSintactico();
+                ComponenteLexico Componente = AnaSin.Analizar(depurar);
 
-                }
+                //while (!Componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
+                //{
+                //    MessageBox.Show(Componente.ToString());
+
+                //    Componente = analizador.Analizar();
+
+
+                //}
+                LlenarTablas();
                 if (ManejadorErrores.HayErrores())
                 {
                     MessageBox.Show("El proceso de compilacion ha finalizado con errores");
@@ -237,6 +243,7 @@ namespace lectorArchivo
             }
             catch (Exception ex)
             {
+                LlenarTablas();
                 MessageBox.Show(ex.Message);
             }
 
@@ -281,26 +288,32 @@ namespace lectorArchivo
             }
             try
             {
-                AnalizadorLexico analizador = new AnalizadorLexico();
-                ComponenteLexico componente = analizador.Analizar();
+                //AnalizadorLexico analizador = new AnalizadorLexico();
+                AnalizadorSintactico AnaSin = new AnalizadorSintactico();
+                ComponenteLexico Componente = AnaSin.Analizar(depurar);
                
-                while (!componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
-                {
-                    //MessageBox.Show(componente.ToString());
+                //while (!Componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
+                //{
+                //    //MessageBox.Show(componente.ToString());
 
-                    componente = analizador.Analizar();
+                //    Componente = analizador.Analizar();
                    
 
-                }
+                //}
                 LlenarTablas();
-                
+
                 if (ManejadorErrores.HayErrores())
                 {
-                    MessageBox.Show("El proceso de compilacion ha finalizado con errores");
+                    MessageBox.Show("Hay problemas de compilacion. Revise la información de los errores encontrados...");
+                }
+                else if (Categoria.FIN_DE_ARCHIVO.Equals(Componente.ObtenerCategoria()))
+                {
+                    MessageBox.Show("El programa se encuentra bien escrito");
+
                 }
                 else
                 {
-                    MessageBox.Show("El proceso de compilacion ha finalizado exitosamente");
+                    MessageBox.Show("Aunque el programa se encuentra bien escrito, faltaron componente por evaluar...");
                 }
             }
             catch (Exception ex)
@@ -363,7 +376,16 @@ namespace lectorArchivo
 
         }
 
-
-        
+        private void checkDepurar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkDepurar.Checked)
+            {
+                depurar = true;
+            }
+            else
+            {
+                depurar = false;
+            }
+        }
     }
 }
