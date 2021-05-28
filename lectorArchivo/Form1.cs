@@ -210,7 +210,7 @@ namespace lectorArchivo
             {
                 lineasEntrada.Add(lineaActual);
             }
-            salidaDatos.Lines = lineasEntrada.ToArray();
+            //salidaDatos.Lines = lineasEntrada.ToArray();
 
             Resetear();
             for (int i = 0; i < lineasEntrada.Count(); i++)
@@ -221,7 +221,9 @@ namespace lectorArchivo
             {
                 //AnalizadorLexico analizador = new AnalizadorLexico();
                 AnalizadorSintactico AnaSin = new AnalizadorSintactico();
-                ComponenteLexico Componente = AnaSin.Analizar(depurar);
+                Dictionary<string, object> Resultados = AnaSin.Analizar(depurar);
+                ComponenteLexico Componente = (ComponenteLexico)Resultados["COMPONENTE"];
+                Stack<double> Pila = (Stack<double>)Resultados["PILA"];
 
                 //while (!Componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
                 //{
@@ -234,11 +236,27 @@ namespace lectorArchivo
                 LlenarTablas();
                 if (ManejadorErrores.HayErrores())
                 {
-                    MessageBox.Show("El proceso de compilacion ha finalizado con errores");
+                    MessageBox.Show("Hay problemas de compilacion. Revise la información de los errores encontrados...");
+                }
+                else if (Categoria.FIN_DE_ARCHIVO.Equals(Componente.ObtenerCategoria()))
+                {
+                    MessageBox.Show("El programa se encuentra bien escrito");
+
+                    if (Pila.Count == 1)
+                    {
+                        string Resultado = Convert.ToString(Pila.Pop());
+                        MessageBox.Show("La operación arrojó como resultado: " + Resultado);
+                        salidaDatos.Text = Resultado;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Faltaron números por evaluar");
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("El proceso de compilacion ha finalizado exitosamente");
+                    MessageBox.Show("Aunque el programa se encuentra bien escrito, faltaron componente por evaluar...");
                 }
             }
             catch (Exception ex)
@@ -280,7 +298,7 @@ namespace lectorArchivo
         private void cargarInfoConsola_Click_1(object sender, EventArgs e)
         {
             String[] lineasEntradas = entradaDatosConsola.Lines;
-            salidaDatos.Lines = lineasEntradas;
+            //salidaDatos.Lines = lineasEntradas;
             Resetear();
             for (int i = 0; i < lineasEntradas.Length; i++)
             {
@@ -290,14 +308,16 @@ namespace lectorArchivo
             {
                 //AnalizadorLexico analizador = new AnalizadorLexico();
                 AnalizadorSintactico AnaSin = new AnalizadorSintactico();
-                ComponenteLexico Componente = AnaSin.Analizar(depurar);
-               
+                Dictionary<string, object> Resultados = AnaSin.Analizar(depurar);
+                ComponenteLexico Componente = (ComponenteLexico) Resultados["COMPONENTE"];
+                Stack<double> Pila = (Stack<double>)Resultados["PILA"];
+
                 //while (!Componente.ObtenerCategoria().Equals(Categoria.FIN_DE_ARCHIVO))
                 //{
                 //    //MessageBox.Show(componente.ToString());
 
                 //    Componente = analizador.Analizar();
-                   
+
 
                 //}
                 LlenarTablas();
@@ -309,6 +329,17 @@ namespace lectorArchivo
                 else if (Categoria.FIN_DE_ARCHIVO.Equals(Componente.ObtenerCategoria()))
                 {
                     MessageBox.Show("El programa se encuentra bien escrito");
+
+                    if (Pila.Count == 1)
+                    {
+                        string Resultado = Convert.ToString(Pila.Pop());
+                        MessageBox.Show("La operación arrojó como resultado: " + Resultado);
+                        salidaDatos.Text = Resultado;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Faltaron números por evaluar");
+                    }
 
                 }
                 else
